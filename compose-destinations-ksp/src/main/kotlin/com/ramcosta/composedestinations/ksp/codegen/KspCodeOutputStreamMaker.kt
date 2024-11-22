@@ -21,7 +21,7 @@ class KspCodeOutputStreamMaker(
     ): OutputStream {
 
         val sources = sourceIds.mapNotNull { sourceMapper.mapToKSFile(it) }.toTypedArray()
-        val dependencies = if (sources.isEmpty()) {
+        val dependencies = if (sources.isEmpty() && false) {
             Dependencies.ALL_FILES
         } else {
             Dependencies(
