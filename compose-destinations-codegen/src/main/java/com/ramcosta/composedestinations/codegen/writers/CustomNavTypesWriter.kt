@@ -10,7 +10,9 @@ import com.ramcosta.composedestinations.codegen.commons.isArrayOrArrayList
 import com.ramcosta.composedestinations.codegen.commons.isCustomArrayOrArrayListTypeNavArg
 import com.ramcosta.composedestinations.codegen.commons.isCustomTypeNavArg
 import com.ramcosta.composedestinations.codegen.commons.plusAssign
+import com.ramcosta.composedestinations.codegen.commons.sourceIds
 import com.ramcosta.composedestinations.codegen.facades.CodeOutputStreamMaker
+import com.ramcosta.composedestinations.codegen.facades.Logger
 import com.ramcosta.composedestinations.codegen.model.ClassKind
 import com.ramcosta.composedestinations.codegen.model.CodeGenProcessedDestination
 import com.ramcosta.composedestinations.codegen.model.CustomNavType
@@ -190,6 +192,7 @@ internal class CustomNavTypesWriter(
             )
         }
 
+        Logger.instance.info("NavGraph Writing NavGraph file for in EnumCustomNavTypes")
         codeGenerator.makeFile(
             "EnumCustomNavTypes",
             "$codeGenBasePackageName.navtype",

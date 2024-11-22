@@ -4,6 +4,7 @@ import com.ramcosta.composedestinations.codegen.codeGenBasePackageName
 import com.ramcosta.composedestinations.codegen.commons.RawNavGraphTree
 import com.ramcosta.composedestinations.codegen.commons.sourceIds
 import com.ramcosta.composedestinations.codegen.facades.CodeOutputStreamMaker
+import com.ramcosta.composedestinations.codegen.facades.Logger
 import com.ramcosta.composedestinations.codegen.model.CodeGenProcessedDestination
 import com.ramcosta.composedestinations.codegen.model.CustomNavType
 import com.ramcosta.composedestinations.codegen.model.RawNavArgsClass
@@ -81,10 +82,13 @@ $VISIBILITY_PLACEHOLDER fun $ARGS_DATA_CLASS_SIMPLE_NAME.toSavedStateHandle(
             importableHelper.addPriorityQualifiedImport(it)
         }
 
+        Logger.instance.info("NavGraph Writing NavGraph file for ArgsToSavedStateHandle in CodeOutputStreamMaker")
+        val sourceIdsArray = sourceIds(generatedDestinations, navGraphTrees).toTypedArray()
+        Logger.instance.info("NavGraph SourceIds for ArgsToSavedStateHandle in SingleNavGraphWriter: $sourceIdsArray")
         codeGenerator.makeFile(
             packageName = "$codeGenBasePackageName.navargs",
             name = "ArgsToSavedStateHandle",
-            sourceIds = sourceIds(generatedDestinations, navGraphTrees).toTypedArray()
+            sourceIds = sourceIdsArray,
         ).writeSourceFile(
             packageStatement = argsToSavedStateHandleTemplate.packageStatement,
             importableHelper = importableHelper,

@@ -14,7 +14,9 @@ import com.ramcosta.composedestinations.codegen.commons.experimentalAnimationApi
 import com.ramcosta.composedestinations.codegen.commons.plusAssign
 import com.ramcosta.composedestinations.codegen.commons.removeInstancesOf
 import com.ramcosta.composedestinations.codegen.commons.setOfPublicStartParticipatingTypes
+import com.ramcosta.composedestinations.codegen.commons.sourceIds
 import com.ramcosta.composedestinations.codegen.facades.CodeOutputStreamMaker
+import com.ramcosta.composedestinations.codegen.facades.Logger
 import com.ramcosta.composedestinations.codegen.model.CodeGenConfig
 import com.ramcosta.composedestinations.codegen.model.CodeGenProcessedDestination
 import com.ramcosta.composedestinations.codegen.model.CustomNavType
@@ -71,6 +73,8 @@ internal class SingleDestinationWriter(
     }
 
     fun write() = with(destination) {
+        Logger.instance.info("NavGraph Writing NavGraph file for $name in CodeOutputStreamer")
+        Logger.instance.info("NavGraph SourceIds in CodeOutputStreamer: $sourceIds")
         codeGenerator.makeFile(
             packageName = destinationsPackageName,
             name = name,

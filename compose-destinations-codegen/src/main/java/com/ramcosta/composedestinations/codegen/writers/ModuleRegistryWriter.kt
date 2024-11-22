@@ -8,6 +8,7 @@ import com.ramcosta.composedestinations.codegen.commons.coreTypes
 import com.ramcosta.composedestinations.codegen.commons.isCustomTypeNavArg
 import com.ramcosta.composedestinations.codegen.commons.sourceIds
 import com.ramcosta.composedestinations.codegen.facades.CodeOutputStreamMaker
+import com.ramcosta.composedestinations.codegen.facades.Logger
 import com.ramcosta.composedestinations.codegen.model.CodeGenConfig
 import com.ramcosta.composedestinations.codegen.model.CodeGenProcessedDestination
 import com.ramcosta.composedestinations.codegen.model.CustomNavType
@@ -54,10 +55,10 @@ internal class ModuleRegistryWriter(
                 "$CORE_PACKAGE_NAME.spec.DestinationSpec"
             )
         )
+        Logger.instance.info("NavGraph Writing NavGraph file for _ModuleRegistry_$registryId in CodeOutputStreamMaker")
         codeGenerator.makeFile(
             "_ModuleRegistry_$registryId",
             packageName,
-            sourceIds = sourceIds(destinations, graphTrees).toTypedArray()
         ).writeSourceFile(
             packageStatement = "package $packageName",
             importableHelper = importableHelper,

@@ -4,6 +4,7 @@ import com.ramcosta.composedestinations.codegen.codeGenBasePackageName
 import com.ramcosta.composedestinations.codegen.commons.plusAssign
 import com.ramcosta.composedestinations.codegen.commons.sourceIds
 import com.ramcosta.composedestinations.codegen.facades.CodeOutputStreamMaker
+import com.ramcosta.composedestinations.codegen.facades.Logger
 import com.ramcosta.composedestinations.codegen.model.CodeGenProcessedDestination
 import com.ramcosta.composedestinations.codegen.moduleName
 import com.ramcosta.composedestinations.codegen.templates.MODULE_DESTINATIONS_CLASS_NAME_PLACEHOLDER
@@ -25,6 +26,8 @@ internal class DestinationsModeWriter(
         if (generatedDestinations.isEmpty()) {
             return
         }
+        Logger.instance.info("NavGraph Writing NavGraph file for $className in DestinationsModeWriter")
+        Logger.instance.info("NavGraph SourceIds in CodeOutputStreamer: ${sourceIds(generatedDestinations)}")
 
         codeGenerator.makeFile(
             packageName = codeGenBasePackageName,

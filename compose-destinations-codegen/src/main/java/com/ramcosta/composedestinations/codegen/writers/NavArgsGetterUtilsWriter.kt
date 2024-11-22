@@ -6,6 +6,7 @@ import com.ramcosta.composedestinations.codegen.commons.plusAssign
 import com.ramcosta.composedestinations.codegen.commons.removeFromTo
 import com.ramcosta.composedestinations.codegen.commons.sourceIds
 import com.ramcosta.composedestinations.codegen.facades.CodeOutputStreamMaker
+import com.ramcosta.composedestinations.codegen.facades.Logger
 import com.ramcosta.composedestinations.codegen.model.CodeGenProcessedDestination
 import com.ramcosta.composedestinations.codegen.templates.DESTINATION_ARGS_METHODS_SECTION_END
 import com.ramcosta.composedestinations.codegen.templates.DESTINATION_ARGS_METHODS_SECTION_START
@@ -39,10 +40,13 @@ internal class NavArgsGettersWriter(
             return
         }
 
+        Logger.instance.info("NavGraph Writing NavGraph file for ArgsToSavedStateHandle in NavArgsGetterUtilsWriter")
+        val sourceIdsArray = sourceIds(generatedDestinations, navGraphTrees).toTypedArray()
+        Logger.instance.info("NavGraph SourceIds for ArgsToSavedStateHandle in NavArgsGetterUtilsWriter: $sourceIdsArray")
         val file: OutputStream = codeGenerator.makeFile(
             packageName = "$codeGenBasePackageName.navargs",
             name = "NavArgsGetters",
-            sourceIds = sourceIds(generatedDestinations, navGraphTrees).toTypedArray()
+            sourceIds = sourceIdsArray,
         )
 
         val destinationsWithNavArgs = generatedDestinations.filter { it.navArgsClass != null }

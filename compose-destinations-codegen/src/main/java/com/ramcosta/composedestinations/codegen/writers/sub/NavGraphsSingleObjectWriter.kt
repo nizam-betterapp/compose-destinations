@@ -7,6 +7,7 @@ import com.ramcosta.composedestinations.codegen.commons.RawNavGraphTree
 import com.ramcosta.composedestinations.codegen.commons.plusAssign
 import com.ramcosta.composedestinations.codegen.commons.sourceIds
 import com.ramcosta.composedestinations.codegen.facades.CodeOutputStreamMaker
+import com.ramcosta.composedestinations.codegen.facades.Logger
 import com.ramcosta.composedestinations.codegen.model.CodeGenProcessedDestination
 import com.ramcosta.composedestinations.codegen.model.CustomNavType
 import com.ramcosta.composedestinations.codegen.model.Importable
@@ -66,6 +67,8 @@ internal class NavGraphsSingleObjectWriter(
         topLevelGraphs: List<RawNavGraphTree>,
         flattenGraphs: List<RawNavGraphTree>
     ) {
+        Logger.instance.info("NavGraph Writing NavGraph file for $moduleName$GENERATED_NAV_GRAPHS_OBJECT in CodeOutputStreamMaker")
+        Logger.instance.info("NavGraph SourceIds in CodeOutputStreamMaker: ${sourceIds(generatedDestinations)}")
         codeGenerator.makeFile(
             packageName = codeGenBasePackageName,
             name = "$moduleName$GENERATED_NAV_GRAPHS_OBJECT",

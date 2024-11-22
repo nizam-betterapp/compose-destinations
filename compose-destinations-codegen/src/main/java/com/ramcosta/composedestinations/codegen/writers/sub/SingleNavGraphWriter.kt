@@ -19,6 +19,7 @@ import com.ramcosta.composedestinations.codegen.commons.sourceIds
 import com.ramcosta.composedestinations.codegen.commons.startingRouteInfo
 import com.ramcosta.composedestinations.codegen.commons.toTypeCode
 import com.ramcosta.composedestinations.codegen.facades.CodeOutputStreamMaker
+import com.ramcosta.composedestinations.codegen.facades.Logger
 import com.ramcosta.composedestinations.codegen.model.CodeGenProcessedDestination
 import com.ramcosta.composedestinations.codegen.model.ExternalRoute
 import com.ramcosta.composedestinations.codegen.model.Importable
@@ -163,10 +164,13 @@ internal class SingleNavGraphWriter(
                 it
             }
 
+        Logger.instance.info("NavGraph Writing NavGraph file for ${navGraph.name} in SingleNavGraphWriter")
+        val sourceIdsArray = sourceIds(navGraph.destinations, listOf(navGraph)).toTypedArray()
+        Logger.instance.info("NavGraph SourceIds for ${navGraph.name} in SingleNavGraphWriter: $sourceIdsArray")
         codeGenerator.makeFile(
             packageName = navGraphsPackageName,
             name = navGraph.name,
-            sourceIds = sourceIds(navGraph.destinations, listOf(navGraph)).toTypedArray(),
+            sourceIds = sourceIdsArray,
         )
             .writeSourceFile(
                 packageStatement = moduleNavGraphTemplate.packageStatement,
