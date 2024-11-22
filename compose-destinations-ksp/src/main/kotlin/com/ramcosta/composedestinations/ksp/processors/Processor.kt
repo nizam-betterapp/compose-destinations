@@ -55,6 +55,7 @@ class Processor(
             !navGraphAnnotations.iterator().hasNext() &&
             !navHostGraphAnnotations.iterator().hasNext()
         ) {
+            Logger.instance.info("NizamCosta: Processor No destinations found")
             return emptyList()
         }
 
@@ -80,6 +81,9 @@ class Processor(
             navTypeSerializers.associateBy { it.genericType }
         )
         val destinations = functionsToDestinationsMapper.map(composableDestinations.map { it.immutable() }, activityDestinations)
+        Logger.instance.info("NizamCosta: composableDestinations: size: ${destinations.size} all: ${destinations.joinToString("\n") { it.name }}")
+        Logger.instance.info("NizamCosta: activityDestinations: size: ${activityDestinations.size} all: ${activityDestinations.joinToString("\n") { it.toString() }}")
+        Logger.instance.info("NizamCosta: navGraphs: size: ${navGraphs.size} all: ${navGraphs.joinToString("\n") { it.name }}")
 
         CodeGenerator(
             codeGenerator = kspCodeOutputStreamMaker,
