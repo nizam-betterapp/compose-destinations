@@ -25,7 +25,7 @@ class KspCodeOutputStreamMaker(
             Dependencies.ALL_FILES
         } else {
             Dependencies(
-                true,
+                false,
                 *sources
             )
         }
